@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: Cats
+  description: "Questions:\n 1. In post and put requests we used link to model, but\
+    \ some field not necessary, especially for put requests. how can i change this?\
+    \ \n 2. ..."
+  version: "1.0"
+servers:
+- url: http://18.194.207.51:8000/
+tags:
+- name: native
+  description: Acsees to cats via routes in views
+  # externalDocs:
+  #   description: REST VSCode plugin file
+  #   url: https://drive.google.com/file/d/1j49YJeiVrhkv7Vs82TH6HRN7sRN0g38I/view?usp=sharing
+- name: rest
+  description: Access to cats via class from rest-framework
+paths:
+  /native/cats:
+    get:
+      tags:
+      - native
+      summary: all cats
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cat'
+  /native/breeds:
+    get:
+      tags:
+      - native
+      summary: all breeds of cats
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Breed'
+  /native/cats/new:
+    post:
+      tags:
+      - native
+      summary: create new cat
+      requestBody:
+        description: create new cat
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Cat'
+        required: true
+      responses:
+        201:
+          description: Created
+          content: {}
+        400:
+          description: incorrect format or data
+          content: {}
+      x-codegen-request-body-name: body
+  /native/cats/{cat_id}:
+    get:
+      tags:
+      - native
+      summary: return cat by id
+      parameters:
+      - name: cat_id
+        in: path
+        description: cat ID
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Cat'
+        404:
+          description: Cat not found
+          content: {}
+    put:
+      tags:
+      - native
+      summary: update field of cat
+      parameters:
+      - name: cat_id
+        in: path
+        description: cat ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: update paramets of cat
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Cat'
+        required: true
+      responses:
+        204:
+          description: No content
+          content: {}
+        400:
+          description: incorrect format
+          content: {}
+        404:
+          description: Cat not found
+          content: {}
+        422:
+          description: Incorrect data
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - native
+      summary: delete cat by id
+      parameters:
+      - name: cat_id
+        in: path
+        description: cat ID
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          description: No content
+          content: {}
+        404:
+          description: Cat not found
+          content: {}
+components:
+  schemas:
+    Cat:
+      required:
+      - age
+      - desc
+      - name
+      type: object
+      properties:
+        cat_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        age:
+          type: integer
+          format: positive int32
+        breed:
+          type: string
+          description: ref to Breed
+        woolliness:
+          type: integer
+          format: positive int32
+        desc:
+          type: string
+    Breed:
+      required:
+      - title
+      type: object
+      properties:
+        breed_id:
+          type: integer
+          format: int64
+        title:
+          type: string

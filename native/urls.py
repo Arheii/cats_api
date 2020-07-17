@@ -12,6 +12,6 @@ urlpatterns = [
     path("breeds", views.breeds, name="breeds"),
     path("cats", views.cats, name="cats"),
     path("cats/<int:cat_id>", views.cat, name="cat"),
-    path("cats/new", views.new, name="new")
+    path("cats/new", views.new, name="new"),
     # path("emails/<str:mailbox>", views.mailbox, name="mailbox"),
 ]

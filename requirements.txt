@@ -1,2 +1,4 @@
 psycopg2
 djangorestframework
+django-rest-swagger
+pyyaml-5.3.1

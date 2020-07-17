@@ -34,7 +34,9 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'native',
-    # 'rest',
+    'rest',
+    'rest_framework',
+    'rest_framework_swagger',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
