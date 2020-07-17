@@ -1,0 +1,46 @@
+
+http://18.194.207.51:8000/native/cats
+###
+
+http://18.194.207.51:8000/native/breeds
+###
+
+http://18.194.207.51:8000/native/cats/2
+###
+
+
+PUT http://18.194.207.51:8000/native/cats/2
+
+{
+  "name": "Vas'ka 2"
+}
+### 
+
+PUT http://18.194.207.51:8000/native/cats/2
+
+{
+  "age": -5
+}
+### 
+
+PUT http://18.194.207.51:8000/native/cats/5
+
+{ 
+  "breed": null
+}
+### 
+
+
+POST http://18.194.207.51:8000/native/cats/new
+
+{
+  "name": "Pushok",
+  "age": 5,
+  "breed": "bambino",
+  "woolliness": 15,
+  "desc": "usual"
+}
+###
+
+DELETE http://18.194.207.51:8000/native/cats/7
+
